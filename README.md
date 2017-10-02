@@ -2,12 +2,11 @@
 > KBT is a build tool for Karma project based on cmake.
 
 ## Description
-KBT supply a method to generate project based on cmake. It also can help us manage dependencies and make build progress easily.
+KBT supply a method to generate project based on cmake. It also can help us manage dependencies and make build process easily.
 
 ## Dependencies
-* Cmake
-* unzip
-* wget/curl
+* cmake
+* git
 
 ## Installation
 Clone KBT:
@@ -43,14 +42,14 @@ cmake ..
 ```
 4. The project structure will be founded automatically. KBT will download all dependencies from github.
 ```
--- .gitigrone
 -- src/
 -- include/
 -- test/
 -- dependencies/
--- build
+-- build/
 -- CMakeLists.txt
 -- sample.config
+-- .gitigrone
 ```
 
 ### Build 
@@ -100,7 +99,7 @@ You can choose the following `KBT_PLATFORM` value.
 If this value is `*`, KBT will fill this variable by current system.
 
 ### KBT_SET_PROJECT_TYPE
-This function will set `KBT_PROJECT_TYPE` variable. You can choose the following `KBT_PROJECT_TYPE` value.
+This function will set `KBT_${PROJECT_NAME}_TYPE` variable. You can choose the following `KBT_PROJECT_TYPE` value.
 
 - bin
 - lib
