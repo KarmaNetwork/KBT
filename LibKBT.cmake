@@ -12,7 +12,7 @@ macro(kbt_project name)
     include_directories("${PROJECT_SOURCE_DIR}/include")
 
     # Download .gitignore
-    kbt_download("https://raw.githubusercontent.com/tiannian/KBT/master/.gitignore" "${CMAKE_SOURCE_DIR}/.gitignore")
+    kbt_download("https://raw.githubusercontent.com/tiannian/KBT/master/.gitignore" "${PROJECT_SOURCE_DIR}/.gitignore")
 endmacro(kbt_project name)
 
 macro(kbt_set_arch arch)
