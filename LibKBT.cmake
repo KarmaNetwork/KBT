@@ -11,8 +11,8 @@ macro(kbt_project name)
     file(APPEND "${PROJECT_NAME}.config" "#cmakedefine KBT_${PROJECT_NAME}_TYPE ${KBT_${PROJECT_NAME}_TYPE}\n")
     include_directories("${PROJECT_SOURCE_DIR}/include")
 
-    # Download .gitingrone
-    kbt_download("https://raw.githubusercontent.com/tiannian/KBT/master/.gitingrone" "${CMAKE_SOURCE_DIR}/.gitingrone")
+    # Download .gitignore
+    kbt_download("https://raw.githubusercontent.com/tiannian/KBT/master/.gitignore" "${CMAKE_SOURCE_DIR}/.gitignore")
 endmacro(kbt_project name)
 
 macro(kbt_set_arch arch)
