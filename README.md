@@ -63,6 +63,7 @@ make
 ## Example
 ```
 INCLUDE (KBT)
+cmake_minimum_required(VERSION 3.5)
 KBT_PROJECT(sample)
 KBT_SET_ARCH(xtensel)
 KBT_SET_PLATFORM(esp8266)
