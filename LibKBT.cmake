@@ -7,7 +7,7 @@ macro(kbt_project name)
     include_directories(BEFORE "${PROJECT_SOURCE_DIR}/include")
 
     # Download .gitignore
-    kbt_download("https://raw.githubusercontent.com/tiannian/KBT/master/.gitignore" "${PROJECT_SOURCE_DIR}/.gitignore")
+    kbt_download("https://raw.githubusercontent.com/tiannian/KBT/${KBT_VAR_BRANCH}/.gitignore" "${PROJECT_SOURCE_DIR}/.gitignore")
 endmacro(kbt_project name)
 
 macro(kbt_set_arch arch)
@@ -19,7 +19,7 @@ endmacro(kbt_set_arch arch)
 macro(kbt_set_platform platform)
     if(NOT KBT_PLATFORM)
         set(KBT_PLATFORM ${platform})
-        kbt_download("https://raw.githubusercontent.com/tiannian/KBT/master/${KBT_PLATFORM}.cmake" "${CMAKE_SOURCE_DIR}/build/${KBT_PLATFORM}.cmake")
+        kbt_download("https://raw.githubusercontent.com/tiannian/KBT/${KBT_VAR_BRANCH}/${KBT_PLATFORM}.cmake" "${CMAKE_SOURCE_DIR}/build/${KBT_PLATFORM}.cmake")
         include(${CMAKE_SOURCE_DIR}/build/${KBT_PLATFORM}.cmake)
     endif(NOT KBT_PLATFORM)
 endmacro(kbt_set_platform platform)

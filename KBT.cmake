@@ -1,3 +1,5 @@
+set (KBT_VAR_BRANCH simple_dev)
+
 macro(kbt_download url local)
     file(GLOB kbt_file_status ${local})
     if(NOT kbt_file_status)
@@ -10,5 +12,5 @@ macro(kbt_download url local)
     endif(NOT kbt_file_status)
 endmacro(kbt_download url local)
 
-kbt_download("https://raw.githubusercontent.com/tiannian/KBT/master/LibKBT.cmake" "${CMAKE_SOURCE_DIR}/build/LibKBT.cmake")
+kbt_download("https://raw.githubusercontent.com/tiannian/KBT/${KBT_VAR_BRANCH}/LibKBT.cmake" "${CMAKE_SOURCE_DIR}/build/LibKBT.cmake")
 include(${CMAKE_SOURCE_DIR}/build/LibKBT.cmake)
