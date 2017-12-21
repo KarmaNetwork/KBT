@@ -1,16 +1,6 @@
-set (KBT_VAR_BRANCH simple_dev)
+set (KBT_VAR_BRANCH command)
+set (KBT_VAR_TOOLS_DIR ${CMAKE_BINARY_DIR}/KBT-${KBT_VAR_BRANCH})
 
-macro(kbt_download url local)
-    file(GLOB kbt_file_status ${local})
-    if(NOT kbt_file_status)
-        file(DOWNLOAD ${url} ${local} STATUS kbt_file_status)
-        list(GET kbt_file_status 0 kbt_file_status)
-        if(NOT(kbt_file_status EQUAL 0))
-            message("Download ${url} failed. Please check your network connection")
-            return()
-        endif(NOT(kbt_file_status EQUAL 0))
-    endif(NOT kbt_file_status)
-endmacro(kbt_download url local)
-
-kbt_download("https://raw.githubusercontent.com/tiannian/KBT/${KBT_VAR_BRANCH}/LibKBT.cmake" "${CMAKE_SOURCE_DIR}/build/LibKBT.cmake")
-include(${CMAKE_SOURCE_DIR}/build/LibKBT.cmake)
+execute_process(COMMAND curl https://codeload.github.com/tiannian/KBT/tar.gz/command 
+                COMMAND tar -zxv)
+include(${KBT_VAR_TOOLS_DIR}/LibKBT.cmake)

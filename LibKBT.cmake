@@ -1,13 +1,9 @@
 macro(kbt_project name)
     project(${name})
-    
-    # Create some dirs
-    file(MAKE_DIRECTORY ${CMAKE_SOURCE_DIR}/src ${CMAKE_SOURCE_DIR}/dependenices ${CMAKE_SOURCE_DIR}/test ${CMAKE_SOURCE_DIR}/include)
-    
-    include_directories(BEFORE "${PROJECT_SOURCE_DIR}/include")
-
-    # Download .gitignore
-    kbt_download("https://raw.githubusercontent.com/tiannian/KBT/${KBT_VAR_BRANCH}/.gitignore" "${PROJECT_SOURCE_DIR}/.gitignore")
+    add_custom_target(init cmake -D KBT_VAR_SOURCE_DIR=${CMAKE_SOURCE_DIR}
+                  -D KBT_VAR_TOOLS_DIR=${CMAKE_BINARY_DIR}/KBT-${KBT_VAR_BRANCH}
+                  -D KBT_VAR_PROJECT_NAME=test
+                  -P ./KBT-command/lib/init.cmake)
 endmacro(kbt_project name)
 
 macro(kbt_set_arch arch)
