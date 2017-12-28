@@ -23,9 +23,9 @@ endif()
 
 # create configure file
 set(KBT_VAR_CONFIG_FILE ${KBT_VAR_SOURCE_DIR}/${KBT_VAR_PROJECT_NAME}.config)
-file(WRITE  ${KBT_VAR_CONFIG_FILE} "#cmakedefine PROJECT_NAME ${PROJECT_NAME}\n" )
-file(APPEND ${KBT_VAR_CONFIG_FILE} "#cmakedefine KBT_ARCH ${KBT_ARCH}\n")
-file(APPEND ${KBT_VAR_CONFIG_FILE} "#cmakedefine KBT_PLATFORM ${KBT_PLATFORM}\n")
-file(APPEND ${KBT_VAR_CONFIG_FILE} "#cmakedefine KBT_${PROJECT_NAME}_TYPE ${KBT_${PROJECT_NAME}_TYPE}\n")
-
+file(WRITE  ${KBT_VAR_CONFIG_FILE} "#cmakedefine PROJECT_NAME ${KBT_VAR_PROJECT_NAME}\n" )
+# file(APPEND ${KBT_VAR_CONFIG_FILE} "#cmakedefine KBT_ARCH ${KBT_ARCH}\n")
+# file(APPEND ${KBT_VAR_CONFIG_FILE} "#cmakedefine KBT_PLATFORM ${KBT_PLATFORM}\n")
+# file(APPEND ${KBT_VAR_CONFIG_FILE} "#cmakedefine KBT_${PROJECT_NAME}_TYPE ${KBT_${PROJECT_NAME}_TYPE}\n")
+#
 
