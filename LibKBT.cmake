@@ -1,5 +1,6 @@
 macro(KBT_PROJECT)
     project(${ARGV0})
+    set(KBT_PROJECT_NAME ${ARGV0})
 endmacro()
 
 macro(KBT_SET_ARCH)
@@ -43,12 +44,14 @@ endmacro()
 
 macro(KBT_CONFIG)
     file(GLOB KBT_VAR_CONFIG_EXISTS ${PROJECT_SOURCE_DIR}/${PROJECT_NAME}.config)
-    if(KBT_VAR_CONFIG_EXISTS)
+    if(NOT KBT_VAR_CONFIG_EXISTS)
         # Create test file
+        # set(KBT_VAR_CONFIG_FILE ${KBT_VAR_SOURCE_DIR}/${KBT_VAR_PROJECT_NAME}.config)
+        file(WRITE  "${PROJECT_SOURCE_DIR}/${PROJECT_NAME}.config" "#cmakedefine KBT_PROJECT_NAME ${PROJECT_NAME}\n" )
         file(APPEND "${PROJECT_SOURCE_DIR}/${PROJECT_NAME}.config" "#cmakedefine KBT_ARCH ${KBT_ARCH}\n")
         file(APPEND "${PROJECT_SOURCE_DIR}/${PROJECT_NAME}.config" "#cmakedefine KBT_PLATFORM ${KBT_PLATFORM}\n")
         file(APPEND "${PROJECT_SOURCE_DIR}/${PROJECT_NAME}.config" "#cmakedefine KBT_${KBT_VAR_PROJECT}_TYPE ${KBT_${KBT_VAR_PROJECT}_TYPE}\n")
-        configure_file("${PROJECT_NAME}.config" "${PROJECT_SOURCE_DIR}/include/config.h")
+        configure_file("${PROJECT_SOURCE_DIR}/${PROJECT_NAME}.config" ${PROJECT_SOURCE_DIR}/include/${PROJECT_NAME}.config.h)        
     endif()
     # Scan all source file
     file(GLOB_RECURSE KBT_VAR_SOURCES_FILES_LIST "${PROJECT_SOURCE_DIR}/src/*.c")
