@@ -43,11 +43,11 @@ endmacro()
 
 macro(KBT_CONFIG)
     file(GLOB KBT_VAR_CONFIG_EXISTS ${PROJECT_SOURCE_DIR}/${PROJECT_NAME}.config)
-    if(NOT KBT_VAR_CONFIG_EXISTS)
+    if(KBT_VAR_CONFIG_EXISTS)
         # Create test file
         file(APPEND "${PROJECT_SOURCE_DIR}/${PROJECT_NAME}.config" "#cmakedefine KBT_ARCH ${KBT_ARCH}\n")
         file(APPEND "${PROJECT_SOURCE_DIR}/${PROJECT_NAME}.config" "#cmakedefine KBT_PLATFORM ${KBT_PLATFORM}\n")
-        file(APPEND "${PROJECT_SOURCE_DIR}/${PROJECT_NAME}.config" "#cmakedefine KBT_${PROJECT_NAME}_TYPE ${KBT_${PROJECT_NAME}_TYPE}\n")
+        file(APPEND "${PROJECT_SOURCE_DIR}/${PROJECT_NAME}.config" "#cmakedefine KBT_${KBT_VAR_PROJECT}_TYPE ${KBT_${KBT_VAR_PROJECT}_TYPE}\n")
         configure_file("${PROJECT_NAME}.config" "${PROJECT_SOURCE_DIR}/include/config.h")
     endif()
     # Scan all source file
