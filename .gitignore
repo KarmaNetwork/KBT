@@ -1,5 +1,5 @@
 build/*
 dependenices/*
 dev_dependenices/*
-include/config.h
+include/*.config.h
 
