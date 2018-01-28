@@ -67,8 +67,9 @@ macro(KBT_ADD_DEPENDENTICES)
         list(GET KBT_VAR_DEP 0 KBT_VAR_PARENT)
         list(GET KBT_VAR_DEP 1 KBT_VAR_DEP_NAME)
         file(MAKE_DIRECTORY ${CMAKE_SOURCE_DIR}/dependenices/${KBT_VAR_PARENT})
+        message("Download dependenices ${ARGV0}-${ARGV1} from github")
         execute_process(COMMAND curl https://codeload.github.com/${ARGV0}/tar.gz/${ARGV1} 
-            COMMAND tar -zxv WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/dependenices/${KBT_VAR_PARENT})
+            COMMAND tar -zx WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/dependenices/${KBT_VAR_PARENT})
         file(COPY ${CMAKE_SOURCE_DIR}/dependenices/${ARGV0}-${ARGV1}/include DESTINATION ${CMAKE_BINARY_DIR}/include/${KBT_VAR_PARENT})
         file(RENAME ${CMAKE_BINARY_DIR}/include/${KBT_VAR_PARENT}/include ${CMAKE_BINARY_DIR}/include/${ARGV0})
     endif()
@@ -105,11 +106,4 @@ macro(KBT_CONFIG)
             endif()
         endif()
     endif()
-    # Add init command in makefile
-    # add_custom_target(init cmake -D CMAKE_SOURCE_DIR=${CMAKE_SOURCE_DIR}
-    #               -D KBT_VAR_TOOLS_DIR=${CMAKE_BINARY_DIR}/KBT-${KBT_VAR_BRANCH}
-    #               -D KBT_PROJECT_NAME=${PROJECT_NAME}
-    #               -D KBT_VAR_PROJECT_TYPE=${KBT_${KBT_VAR_PROJECT}_TYPE}
-    #               -P ${KBT_VAR_TOOLS_DIR}/lib/init.cmake
-    #               COMMAND make rebuild_cache)
 endmacro()
