@@ -20,17 +20,15 @@ if(NOT KBT_VAR_FILE_EXISTS)
         COMMAND tar -zx WORKING_DIRECTORY ${KBT_VAR_TOOLS_DIR})
 endif()
 
-set(CMAKE_SYSTEM_NAME ESP8266)
-set(CMAKE_SYSTEM_PROCESSOR ${KBT_ARCH})
-
 set(CMAKE_SYSROOT ${CMAKE_BINARY_DIR}/tools/xtensa-lx106-elf)
-# set(CMAKE_STAGING_PREFIX /home/devel/stage)
 
 set(tools ${CMAKE_SYSROOT})
 set(CMAKE_C_COMPILER ${tools}/bin/xtensa-lx106-elf-gcc)
-set(CMAKE_CXX_COMPILER ${tools}/bin/xtensa-lx106-elf-g++)
+# set(CMAKE_CXX_COMPILER ${tools}/bin/xtensa-lx106-elf-g++)
 
 set(CMAKE_FIND_ROOT_PATH_MODE_PROGRAM NEVER)
 set(CMAKE_FIND_ROOT_PATH_MODE_LIBRARY ONLY)
 set(CMAKE_FIND_ROOT_PATH_MODE_INCLUDE ONLY)
 set(CMAKE_FIND_ROOT_PATH_MODE_PACKAGE ONLY)
+
+enable_language(C)
