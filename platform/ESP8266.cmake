@@ -31,4 +31,11 @@ set(CMAKE_FIND_ROOT_PATH_MODE_LIBRARY ONLY)
 set(CMAKE_FIND_ROOT_PATH_MODE_INCLUDE ONLY)
 set(CMAKE_FIND_ROOT_PATH_MODE_PACKAGE ONLY)
 
+link_directories(${KBT_VAR_TOOLS_DIR}/ESP8266_NONOS_SDK-${KBT_ESP8266_SDK_VERSION}/lib)
+include_directories(${KBT_VAR_TOOLS_DIR}/ESP8266_NONOS_SDK-${KBT_ESP8266_SDK_VERSION}/include)
+
+link_directories(${CMAKE_SYSROOT}/lib)
+include_directories(${CMAKE_SYSROOT}/include)
+
 enable_language(C)
+
