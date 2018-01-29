@@ -30,8 +30,8 @@ touch CMakeLists.txt
 ```
 2. Configure this project through CMakeLists.txt. You must include KBT module first in CMakeList.txt.
 ```
+PROJECT(sample NONE)
 include(KBT)
-KBT_PROJECT(sample)
 # .... some other configuration ...
 ```
 3. Create build folder and do first running.
@@ -62,9 +62,9 @@ make
 
 ## Example
 ```
+PROJECT(sample NONE)
 INCLUDE (KBT)
-cmake_minimum_required(VERSION 3.5)
-KBT_PROJECT(sample)
+cmake_minimum_required(VERSION 3.10)
 KBT_SET_ARCH(xtensel)
 KBT_SET_PLATFORM(esp8266)
 KBT_SET_PROJECT_TYPE(lib)
@@ -114,7 +114,7 @@ This function will add dependencies peoject and clone it from github.
 
 The first arguments is `<auther>/<project-name>`
 
-The second arguments is version. (Not available at this time).
+The second arguments is version.
 
 ### KBT_CONFIG
 Execute this function in the end of CMakeLists.txt script.

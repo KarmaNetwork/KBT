@@ -20,22 +20,20 @@ if(NOT KBT_VAR_FILE_EXISTS)
         COMMAND tar -zx WORKING_DIRECTORY ${KBT_VAR_TOOLS_DIR})
 endif()
 
-set(CMAKE_SYSROOT ${CMAKE_BINARY_DIR}/tools/xtensa-lx106-elf)
+set(tools ${CMAKE_BINARY_DIR}/tools/xtensa-lx106-elf)
 
-set(tools ${CMAKE_SYSROOT})
 set(CMAKE_C_COMPILER ${tools}/bin/xtensa-lx106-elf-gcc)
+# set(CMAKE_C_LINK_EXECUTABLE ${tools}/bin/xtensa-lx106-elf-ld)
 # set(CMAKE_CXX_COMPILER ${tools}/bin/xtensa-lx106-elf-g++)
 
 set(CMAKE_FIND_ROOT_PATH_MODE_PROGRAM NEVER)
 set(CMAKE_FIND_ROOT_PATH_MODE_LIBRARY ONLY)
 set(CMAKE_FIND_ROOT_PATH_MODE_INCLUDE ONLY)
 set(CMAKE_FIND_ROOT_PATH_MODE_PACKAGE ONLY)
-
+set(CMAKE_TRY_COMPILE_TARGET_TYPE STATIC_LIBRARY)
 link_directories(${KBT_VAR_TOOLS_DIR}/ESP8266_NONOS_SDK-${KBT_ESP8266_SDK_VERSION}/lib)
 include_directories(${KBT_VAR_TOOLS_DIR}/ESP8266_NONOS_SDK-${KBT_ESP8266_SDK_VERSION}/include)
 
-link_directories(${CMAKE_SYSROOT}/lib)
-include_directories(${CMAKE_SYSROOT}/include)
-
-enable_language(C)
+link_directories(${tools}/lib)
+include_directories(${tools}/include)
 
