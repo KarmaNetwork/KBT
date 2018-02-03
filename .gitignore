@@ -1,3 +1,3 @@
 build/*
 dependenices/*
-dev_dependenices/*
+__pycache__
