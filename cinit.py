@@ -68,4 +68,6 @@ def command(t):
     f.write('dependences/\n')
     f.write('build/\n')
     f.write('build.ninja\n')
+    f.write('.ninja_deps\n')
+    f.write('.ninja_log\n')
     f.close()
