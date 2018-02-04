@@ -62,4 +62,10 @@ def command(t):
         init_lib(dir_name)
     else:
         init_bin(dir_name)
-
+    
+    # add gitignore
+    f = open('./.gitignore','w')
+    f.write('dependences/\n')
+    f.write('build/\n')
+    f.write('build.ninja\n')
+    f.close()

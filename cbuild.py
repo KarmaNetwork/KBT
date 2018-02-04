@@ -3,6 +3,9 @@ import os
 import platform
 import requests
 import sys
+import tarfile
+import io
+from lib.ninja_syntax import Writer as Ninja
 
 sys.path.append('.')
 
@@ -40,18 +43,44 @@ def command():
     handle = __import__('build.kbt.' + pl, fromlist=pl)
 
     # load platform
-    ccompiler, cxxcompiler = handle.toolchain()
+    #  ccompiler, cxxcompiler = handle.toolchain()
     cdebug, cxxdebug = handle.debug()
     crelease, cxxrelease = handle.release()
 
+    if not os.path.exists('./dependences'):
+        os.mkdir('./dependences')
+
     # parse deps
+    def load_deps(name, version):
+        if not os.path.exists('./dependences/' + name + '-' + version):
+            print('Downloading ' + name + '-' + version)
+            url = 'https://codeload.github.com/' + name + '/tar.gz/' + version
+            r = requests.get(url, stream=True)
+            if r.status_code != 200:
+                print('The specified dependency does not exist.')
+                return False
+            t = tarfile.open(fileobj=io.BytesIO(r.content), mode="r|gz")
+            t.extractall("./dependences")
+        # load
+        result = toml.load("./dependences/" + name + '-' + version + 'karma.toml')
+        dependences = result.get('dependences',{})
+        for name, version in dependences.items():
+            load_deps(name, version)
+
     deps = result.get('dependences',{})
     for name, version in deps.items():
-        # download deps
-        pass
-        # load download
+        load_deps(name, version)
+
+    # search files get array
 
     # build ninja
+    n = open('./build.ninja')
+    ninja = Ninja(n)
+    ninja.rule('cdebug', cdebug, description='Building C debug $out ...', depfile='$out.d')
+    ninja.rule('cxxdebug', cxxdebug, description='Building CXX debug $out ...', depfile='$out.d')
+    ninja.rule('crelease', crelease, description='Building C release $out ...', depfile='$out.d')
+    ninja.rule('cxxrelease', cxxrelease, description='Building CXX release $out ...', depfile='$out.d')
+    n.close()
 
     # start build
 
