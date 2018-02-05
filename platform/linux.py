@@ -6,3 +6,6 @@ def debug():
 
 def release():
     return '-Os -o $out -c $in', '-Os -o $out -c $in'
+
+def link():
+    return '-o $out $in', '-o $out $in'

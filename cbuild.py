@@ -90,25 +90,35 @@ def command():
     load_files('./',clist,cxxlist)
 
     # build ninja
-    n = open('./build.ninja','w')
+    compile_flag = ' -MMD -MF -Iinclude/ '
+    n = open('build.ninja','w')
     ninja = Ninja(n)
-    ninja.rule('cdebug',ccompiler + ' -MMD -MF ' + cdebug, description='Building C debug $out ...', depfile='$out.d')
-    ninja.rule('cxxdebug', cxxcompiler + ' -MMD -MF ' + cxxdebug, description='Building CXX debug $out ...', depfile='$out.d')
-    ninja.rule('crelease', ccompiler + ' -MMD -MF ' + crelease, description='Building C release $out ...', depfile='$out.d')
-    ninja.rule('cxxrelease', cxxcompiler + ' -MMD -MF ' + cxxrelease, description='Building CXX release $out ...', depfile='$out.d')
+    ninja.rule('cdebug',ccompiler + compile_flag + cdebug, description='Building C debug $out ...', depfile='$out.d')
+    ninja.rule('cxxdebug', cxxcompiler + compile_flag + cxxdebug, description='Building CXX debug $out ...', depfile='$out.d')
+    ninja.rule('crelease', ccompiler + compile_flag + crelease, description='Building C release $out ...', depfile='$out.d')
+    ninja.rule('cxxrelease', cxxcompiler + compile_flag+ cxxrelease, description='Building CXX release $out ...', depfile='$out.d')
+    
+    debug_obj = []
+    release_obj = []
+
     for f in clist:
         na = os.path.split(f)[1]
-        ninja.build('./build/debug/'+ na + '.o','cdebug',inputs=f)
-        ninja.build('./build/release'+ na + '.o','crelease',inputs=f)
+        ninja.build('build/debug/'+ na + '.o','cdebug',inputs=f)
+        ninja.build('build/release'+ na + '.o','crelease',inputs=f)
+        debug_obj.append('build/debug/'+ na + '.o')
+        release_obj.append('build/release'+ na + '.o')
     for f in cxxlist:
         na = os.path.split(f)[1]
-        ninja.build('./build/debug/'+ na + '.o','cdebug',inputs=f)
-        ninja.build('./build/release'+ na + '.o','crelease',inputs=f)
-    n.close()
+        ninja.build('build/debug/'+ na + '.o','cdebug',inputs=f)
+        ninja.build('build/release'+ na + '.o','crelease',inputs=f)
+        debug_obj.append('build/debug/'+ na + '.o')
+        release_obj.append('build/release'+ na + '.o')
     
     # link ninja
+    #  ninja.rule('debuglink',)
 
     # deal ninja
 
     # start build
+    n.close()
 
